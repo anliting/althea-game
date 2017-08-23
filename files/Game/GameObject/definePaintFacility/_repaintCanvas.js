@@ -1,11 +1,13 @@
 ;(async()=>{
-    let[
-        sortByPaintPriority,
-        Vector2,
-    ]=await Promise.all([
-        module.shareImport('_repaintCanvas/sortByPaintPriority.js'),
-        module.repository.Vector2,
-    ])
+    let
+        [
+            sortByPaintPriority,
+            template,
+        ]=await Promise.all([
+            module.shareImport('_repaintCanvas/sortByPaintPriority.js'),
+            module.repository.template,
+        ]),
+        Vector2=template.Vector2
     function _repaintCanvas(n){
         if(this._painting)
             this._painting()

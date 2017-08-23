@@ -1,17 +1,19 @@
 if(!module.repository.template)
-    module.repository.template=module.importByPath('https://gitcdn.link/cdn/anliting/template/5650ba86536cf662a2aa6b1bd5d9f3e27ad701bf/src/template.static.js',{mode:1})
+    module.repository.template=module.importByPath('https://gitcdn.link/cdn/anliting/template/4abdb65b6586685bb760a2bf4f6cc0056a2e49ae/src/template.static.js',{mode:1})
 ;(async()=>{
-    let[
-        dom,
-        Vector2,
-        definePaintFacility,
-        defineInterface,
-    ]=await Promise.all([
-        module.repository.althea.dom,
-        module.repository.Vector2,
-        module.shareImport('GameObject/definePaintFacility.js'),
-        module.shareImport('GameObject/defineInterface.js'),
-    ])
+    let
+        [
+            dom,
+            template,
+            definePaintFacility,
+            defineInterface,
+        ]=await Promise.all([
+            module.repository.althea.dom,
+            module.repository.template,
+            module.shareImport('GameObject/definePaintFacility.js'),
+            module.shareImport('GameObject/defineInterface.js'),
+        ]),
+        Vector2=template.Vector2
     function GameObject(){
         this._size=new Vector2(...arguments)
         this._children=new Set
@@ -50,5 +52,6 @@ if(!module.repository.template)
     }
     definePaintFacility(GameObject)
     defineInterface(GameObject.prototype)
+    GameObject.Vector2=Vector2
     return GameObject
 })()

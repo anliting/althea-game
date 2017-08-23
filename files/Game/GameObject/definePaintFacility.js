@@ -14,15 +14,14 @@ let imageServer={
     },
 }
 ;(async()=>{
-    let[
-        dom,
-        Vector2,
-        _repaintCanvas,
-    ]=await Promise.all([
-        module.repository.althea.dom,
-        module.repository.Vector2,
-        module.shareImport('definePaintFacility/_repaintCanvas.js'),
-    ])
+    let
+        [
+            dom,
+            _repaintCanvas,
+        ]=await Promise.all([
+            module.repository.althea.dom,
+            module.shareImport('definePaintFacility/_repaintCanvas.js'),
+        ])
     function _createBackgroundCanvas(img,size){
         if(
             img==this._backgroundImageImage&&

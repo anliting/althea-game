@@ -30,7 +30,7 @@ let imageServer={
         )
             return this._backgroundCanvas
         let
-            c=dom('canvas'),
+            c=dom.canvas(),
             ct=c.getContext('2d')
         ;[c.width,c.height]=size
         ct.fillStyle=ct.createPattern(img,'repeat')

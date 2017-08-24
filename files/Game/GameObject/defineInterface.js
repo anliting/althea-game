@@ -44,7 +44,7 @@
         }
         o.createNode=function(){
             let doc={
-                node:dom('canvas',{className:'object'})
+                node:dom.canvas({className:'object'})
             }
             this._updateNodeWidth(doc)
             this._updateNodeHeight(doc)

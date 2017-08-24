@@ -80,6 +80,10 @@
         n.classList.add('game')
         return n
     }
+    Object.defineProperty(Game.prototype,'adapt',{get(){return()=>{
+        this.width=document.body.clientWidth
+        this.height=document.body.clientHeight
+    }}})
     Game.style=style
     Game.GameObject=GameObject
     return Game

@@ -3,12 +3,10 @@ if(!module.repository.template)
 ;(async()=>{
     let
         [
-            dom,
             template,
             definePaintFacility,
             defineInterface,
         ]=await Promise.all([
-            module.repository.althea.dom,
             module.repository.template,
             module.shareImport('GameObject/definePaintFacility.js'),
             module.shareImport('GameObject/defineInterface.js'),

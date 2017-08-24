@@ -1,9 +1,7 @@
 ;(async()=>{
     let[
-        dom,
         template,
     ]=await Promise.all([
-        module.repository.althea.dom,
         module.repository.template,
     ])
     function Child(o){

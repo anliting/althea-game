@@ -1,5 +1,5 @@
 if(!module.repository.template)
-    module.repository.template=module.importByPath('https://gitcdn.link/cdn/anliting/template/4abdb65b6586685bb760a2bf4f6cc0056a2e49ae/src/template.static.js',{mode:1})
+    module.repository.template=module.importByPath('https://gitcdn.link/cdn/anliting/template/b56af8d4c27e53120c7aaae34b72a8148e22b602/src/template.static.js',{mode:1})
 ;(async()=>{
     let
         [

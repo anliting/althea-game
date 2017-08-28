@@ -14,6 +14,7 @@ Object.entries({"Game/GameObject/defineInterface/appendChild.js":";(async()=>{\n
         GameObject.apply(this,arguments)
         this._key={}
         this._lastAdvancedTime=performance.now()
+        this._pressedKeys={}
         this._processedKeyEvents=[]
         this._unprocessedKeyEvents=[]
         this.maxFps=24
@@ -48,31 +49,42 @@ Object.entries({"Game/GameObject/defineInterface/appendChild.js":";(async()=>{\n
         return this._maxFps
     }})
     Game.prototype.advance=function(t){
-        GameObject.prototype.advance.call(this,t)
-        this._processedKeyEvents=this._processedKeyEvents.concat(
-            this._unprocessedKeyEvents
+        let
+            now=this.time+t,
+            keyEvents=[]
+        while(
+            this._unprocessedKeyEvents.length&&
+            this._unprocessedKeyEvents[0].time<now
         )
-        this._unprocessedKeyEvents=[]
+            keyEvents.push(this._unprocessedKeyEvents.shift())
+        this._keyEvents=keyEvents
+        GameObject.prototype.advance.call(this,t)
+        while(keyEvents.length){
+            let e=keyEvents.shift()
+            if(e.type=='keydown')
+                this._pressedKeys[e.key]=0
+            else if(e.type=='keyup'){
+                if(e.key in this._pressedKeys)
+                    delete this._pressedKeys[e.key]
+            }
+            this._processedKeyEvents.push(e)
+        }
     }
     Game.prototype._keydown=function(e){
         this._key[e.key]=1
         this._unprocessedKeyEvents.push({
             type:'keydown',
-            time:performance.now(),
+            time:this.time+performance.now()-this._lastAdvancedTime,
             key:e.key,
         })
-        if(this.keydown)
-            this.keydown(e)
     }
     Game.prototype._keyup=function(e){
         this._key[e.key]=0
         this._unprocessedKeyEvents.push({
             type:'keyup',
-            time:performance.now(),
+            time:this.time+performance.now()-this._lastAdvancedTime,
             key:e.key,
         })
-        if(this.keyup)
-            this.keyup(e)
     }
     Game.prototype.createNode=function(){
         let n=GameObject.prototype.createNode.apply(this,arguments)

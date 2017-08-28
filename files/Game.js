@@ -13,7 +13,9 @@
     function Game(){
         GameObject.apply(this,arguments)
         this._key={}
-        this._lastTime=performance.now()
+        this._lastAdvancedTime=performance.now()
+        this._processedKeyEvents=[]
+        this._unprocessedKeyEvents=[]
         this.maxFps=24
         this._pendingFrames=[]
         this.paintedFramesCount=0
@@ -29,9 +31,8 @@
     Object.setPrototypeOf(Game.prototype,GameObject.prototype)
     Game.prototype._frame=function(){
         let now=performance.now()
-        if(this.advance)
-            this.advance(now-this._lastTime)
-        this._lastTime=now
+        this.advance(now-this._lastAdvancedTime)
+        this._lastAdvancedTime=now
         this._nodes.map(d=>
             this._repaintCanvas(d.node)
         )
@@ -46,13 +47,30 @@
     },get(){
         return this._maxFps
     }})
+    Game.prototype.advance=function(t){
+        GameObject.prototype.advance.call(this,t)
+        this._processedKeyEvents=this._processedKeyEvents.concat(
+            this._unprocessedKeyEvents
+        )
+        this._unprocessedKeyEvents=[]
+    }
     Game.prototype._keydown=function(e){
         this._key[e.key]=1
+        this._unprocessedKeyEvents.push({
+            type:'keydown',
+            time:performance.now(),
+            key:e.key,
+        })
         if(this.keydown)
             this.keydown(e)
     }
     Game.prototype._keyup=function(e){
         this._key[e.key]=0
+        this._unprocessedKeyEvents.push({
+            type:'keyup',
+            time:performance.now(),
+            key:e.key,
+        })
         if(this.keyup)
             this.keyup(e)
     }

@@ -29,19 +29,14 @@ if(!module.repository.template)
     GameObject.prototype._loadImage=function(path){
         return GameObject.imageServer.load(path)
     }
-    Object.defineProperty(GameObject.prototype,'advance',{set(v){
-        this._advance=v
-    },get(){
-        return dt=>{
-            if(this._advance)
-                this._advance(dt)
-            this._clockChildren.forEach(o=>{
-                if(o.advance)
-                    o.advance(dt)
-            })
-            this.time+=dt
-        }
-    }})
+    GameObject.prototype.advance=function(dt){
+        this._clockChildren.forEach(o=>
+            o.advance(dt)
+        )
+        if(this.onAdvance)
+            this.onAdvance(dt)
+        this.time+=dt
+    }
     GameObject.prototype.bind=function(o){
         this._clockChildren.add(o)
     }

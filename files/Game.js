@@ -77,8 +77,6 @@
             time:this.time+performance.now()-this._lastAdvancedTime,
             key:e.key,
         })
-        if(this.keydown)
-            this.keydown(e)
     }
     Game.prototype._keyup=function(e){
         this._key[e.key]=0
@@ -87,8 +85,6 @@
             time:this.time+performance.now()-this._lastAdvancedTime,
             key:e.key,
         })
-        if(this.keyup)
-            this.keyup(e)
     }
     Game.prototype.createNode=function(){
         let n=GameObject.prototype.createNode.apply(this,arguments)

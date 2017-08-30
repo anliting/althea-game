@@ -37,10 +37,10 @@ if(!module.repository.template)
             this.onAdvance(dt)
         this.time+=dt
     }
-    GameObject.prototype.bind=function(o){
+    GameObject.prototype.addClockChild=function(o){
         this._clockChildren.add(o)
     }
-    GameObject.prototype.unbind=function(o){
+    GameObject.prototype.removeClockChild=function(o){
         this._clockChildren.delete(o)
     }
     definePaintFacility(GameObject)

@@ -10,11 +10,11 @@
     Child.prototype.move=function(position){
         this.position=position
     }
-    function appendChild(o,position=new template.Vector2){
+    function addPaintChild(o,position=new template.Vector2){
         let c=new Child(o)
         c.move(position)
         this._children.add(c)
         return c
     }
-    return appendChild
+    return addPaintChild
 })()

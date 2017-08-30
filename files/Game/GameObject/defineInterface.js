@@ -1,17 +1,17 @@
 ;(async()=>{
     let[
         dom,
-        appendChild
+        addPaintChild,
     ]=await Promise.all([
         module.repository.althea.dom,
-        module.shareImport('defineInterface/appendChild.js'),
+        module.shareImport('defineInterface/addPaintChild.js'),
     ])
     return o=>{
-        o.appendChild=appendChild
-        o.removeChild=function(c){
+        o.addPaintChild=addPaintChild
+        o.removePaintChild=function(c){
             this._children.delete(c)
         }
-        o.removeChildren=function(){
+        o.removePaintChildren=function(){
             [...arguments].map(c=>
                 this._children.delete(c)
             )

@@ -31,10 +31,10 @@ if(!module.repository.template)
     }
     GameObject.prototype.advance=function(dt){
         this._clockChildren.forEach(o=>
-            o.advance(dt)
+            o.advance(...arguments)
         )
         if(this.onAdvance)
-            this.onAdvance(dt)
+            this.onAdvance(...arguments)
         this.time+=dt
     }
     GameObject.prototype.addClockChild=function(o){

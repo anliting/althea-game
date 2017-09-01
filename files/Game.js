@@ -12,7 +12,6 @@
     ])
     function Game(){
         GameObject.apply(this,arguments)
-        this._key={}
         this._lastAdvancedTime=performance.now()
         this._pressedKeys={}
         this._processedKeyEvents=[]
@@ -57,12 +56,16 @@
             this._unprocessedKeyEvents[0].time<now
         )
             keyEvents.push(this._unprocessedKeyEvents.shift())
-        this._keyEvents=keyEvents
-        GameObject.prototype.advance.call(this,t)
+        GameObject.prototype.advance.call(
+            this,
+            t,
+            this._pressedKeys,
+            keyEvents
+        )
         while(keyEvents.length){
             let e=keyEvents.shift()
             if(e.type=='keydown')
-                this._pressedKeys[e.key]=0
+                this._pressedKeys[e.key]=1
             else if(e.type=='keyup'){
                 if(e.key in this._pressedKeys)
                     delete this._pressedKeys[e.key]
@@ -71,7 +74,6 @@
         }
     }
     Game.prototype._keydown=function(e){
-        this._key[e.key]=1
         this._unprocessedKeyEvents.push({
             type:'keydown',
             time:this.time+performance.now()-this._lastAdvancedTime,
@@ -79,7 +81,6 @@
         })
     }
     Game.prototype._keyup=function(e){
-        this._key[e.key]=0
         this._unprocessedKeyEvents.push({
             type:'keyup',
             time:this.time+performance.now()-this._lastAdvancedTime,

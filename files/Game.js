@@ -31,7 +31,9 @@
     Object.setPrototypeOf(Game.prototype,GameObject.prototype)
     Game.prototype._frame=function(){
         let now=performance.now()
-        this.advance(now-this._lastAdvancedTime)
+        this.advance({
+            time:now-this._lastAdvancedTime,
+        })
         this._lastAdvancedTime=now
         this._nodes.map(d=>
             this._repaintCanvas(d.node)
@@ -47,21 +49,20 @@
     },get(){
         return this._maxFps
     }})
-    Game.prototype.advance=function(t){
+    Game.prototype.advance=function(e){
         let
-            now=this.time+t,
+            now=this.time+e.time,
             keyEvents=[]
         while(
             this._unprocessedKeyEvents.length&&
             this._unprocessedKeyEvents[0].time<now
         )
             keyEvents.push(this._unprocessedKeyEvents.shift())
-        GameObject.prototype.advance.call(
-            this,
-            t,
-            this._pressedKeys,
-            keyEvents
-        )
+        GameObject.prototype.advance.call(this,{
+            time:e.time,
+            pressedKeys:this._pressedKeys,
+            keyEvents,
+        })
         while(keyEvents.length){
             let e=keyEvents.shift()
             if(e.type=='keydown')

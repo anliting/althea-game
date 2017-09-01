@@ -29,13 +29,13 @@ if(!module.repository.template)
     GameObject.prototype._loadImage=function(path){
         return GameObject.imageServer.load(path)
     }
-    GameObject.prototype.advance=function(dt){
+    GameObject.prototype.advance=function(e){
         this._clockChildren.forEach(o=>
-            o.advance(...arguments)
+            o.advance(e)
         )
         if(this.onAdvance)
-            this.onAdvance(...arguments)
-        this.time+=dt
+            this.onAdvance(e)
+        this.time+=e.time
     }
     GameObject.prototype.addClockChild=function(o){
         this._clockChildren.add(o)

@@ -1,12 +1,16 @@
+if(!module.repository.template)
+    module.repository.template=module.importByPath('https://gitcdn.link/cdn/anliting/template/6333a0e1b9546f85be0279dc9a021f51f949c408/src/template.static.js',{mode:1})
 ;(async()=>{
     let[
         arg,
         dom,
+        template,
         GameObject,
         style,
     ]=await Promise.all([
         module.repository.althea.arg,
         module.repository.althea.dom,
+        module.repository.template,
         module.shareImport('Game/GameObject.js'),
         module.get('Game/style.css'),
     ])
@@ -31,9 +35,9 @@
     Object.setPrototypeOf(Game.prototype,GameObject.prototype)
     Game.prototype._frame=function(){
         let now=performance.now()
-        this.advance({
-            time:now-this._lastAdvancedTime,
-        })
+        this.advance(new AdvanceEvent(
+            now-this._lastAdvancedTime
+        ))
         this._lastAdvancedTime=now
         this._nodes.map(d=>
             this._repaintCanvas(d.node)
@@ -64,20 +68,13 @@
             f.time-=this.time
             keyEvents.push(f)
         }
-        GameObject.prototype.advance.call(this,{
-            time:e.time,
-            pressedKeys:this._pressedKeys,
-            keyEvents,
-        })
-        while(keyEvents.length){
-            let e=keyEvents.shift()
-            if(e.type=='keydown')
-                this._pressedKeys[e.key]=1
-            else if(e.type=='keyup'){
-                if(e.key in this._pressedKeys)
-                    delete this._pressedKeys[e.key]
-            }
-        }
+        e.pressedKeys=this._pressedKeys
+        e.keyEvents=keyEvents
+        GameObject.prototype.advance.call(this,e)
+        while(keyEvents.length)
+            Game.applyKeyEventToPressedKeys(
+                keyEvents.shift(),this._pressedKeys
+            )
     }
     Game.prototype._keydown=function(e){
         this._unprocessedKeyEvents.push({
@@ -121,7 +118,30 @@
         this.width=document.body.clientWidth
         this.height=document.body.clientHeight
     }}})
+    Game.applyKeyEventToPressedKeys=function(ke,pk){
+        if(ke.type=='keydown')
+            pk[ke.key]=1
+        else if(ke.type=='keyup'&&ke.key in pk)
+            delete pk[ke.key]
+    }
     Game.style=style
     Game.GameObject=GameObject
+    function AdvanceEvent(time){
+        this.time=time
+    }
+    AdvanceEvent.prototype.forEachFragment=function(func){
+        let
+            pressedKeys=Object.assign({},this.pressedKeys),
+            fragments=[...this.keyEvents,{time:this.time}]
+        template.array.difference(
+            fragments.map(e=>e.time)
+        ).forEach((dt,i)=>{
+            fragments[i].dt=dt
+        })
+        fragments.forEach(f=>{
+            func(f.dt,pressedKeys)
+            Game.applyKeyEventToPressedKeys(f,pressedKeys)
+        })
+    }
     return Game
 })()

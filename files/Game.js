@@ -1,18 +1,26 @@
 if(!module.repository.template)
     module.repository.template=module.importByPath('https://gitcdn.link/cdn/anliting/template/6333a0e1b9546f85be0279dc9a021f51f949c408/src/template.static.js',{mode:1})
+Object.assign(module.repository,{
+    GameObject:module.shareImport('Game/GameObject.js'),
+    applyKeyEventToPressedKeys:module.shareImport('Game/applyKeyEventToPressedKeys.js'),
+})
 ;(async()=>{
     let[
         arg,
         dom,
-        template,
         GameObject,
+        applyKeyEventToPressedKeys,
         style,
+        createNode,
+        AdvanceEvent,
     ]=await Promise.all([
         module.repository.althea.arg,
         module.repository.althea.dom,
-        module.repository.template,
-        module.shareImport('Game/GameObject.js'),
+        module.repository.GameObject,
+        module.repository.applyKeyEventToPressedKeys,
         module.get('Game/style.css'),
+        module.shareImport('Game/prototype.createNode.js'),
+        module.shareImport('Game/AdvanceEvent.js'),
     ])
     function Game(){
         GameObject.apply(this,arguments)
@@ -90,58 +98,13 @@ if(!module.repository.template)
             key:e.key,
         })
     }
-    Game.prototype.createNode=function(){
-        let n=GameObject.prototype.createNode.apply(this,arguments)
-        dom(n,{
-            tabIndex:-1,
-            oncontextmenu:e=>{
-                if(arg.h)
-                    return
-                e.preventDefault()
-                e.stopPropagation()
-            },
-            onkeydown:e=>{
-                e.preventDefault()
-                e.stopPropagation()
-                this._keydown(e)
-            },
-            onkeyup:e=>{
-                e.preventDefault()
-                e.stopPropagation()
-                this._keyup(e)
-            }
-        })
-        n.classList.add('game')
-        return n
-    }
+    Game.prototype.createNode=createNode
     Object.defineProperty(Game.prototype,'adapt',{get(){return()=>{
         this.width=document.body.clientWidth
         this.height=document.body.clientHeight
     }}})
-    Game.applyKeyEventToPressedKeys=function(ke,pk){
-        if(ke.type=='keydown')
-            pk[ke.key]=1
-        else if(ke.type=='keyup'&&ke.key in pk)
-            delete pk[ke.key]
-    }
+    Game.applyKeyEventToPressedKeys=applyKeyEventToPressedKeys
     Game.style=style
     Game.GameObject=GameObject
-    function AdvanceEvent(time){
-        this.time=time
-    }
-    AdvanceEvent.prototype.forEachFragment=function(func){
-        let
-            pressedKeys=Object.assign({},this.pressedKeys),
-            fragments=[...this.keyEvents,{time:this.time}]
-        template.array.difference(
-            fragments.map(e=>e.time)
-        ).forEach((dt,i)=>{
-            fragments[i].dt=dt
-        })
-        fragments.forEach(f=>{
-            func(f.dt,pressedKeys)
-            Game.applyKeyEventToPressedKeys(f,pressedKeys)
-        })
-    }
     return Game
 })()

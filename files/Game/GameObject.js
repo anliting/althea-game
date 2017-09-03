@@ -4,10 +4,12 @@
             template,
             definePaintFacility,
             defineInterface,
+            intersect,
         ]=await Promise.all([
             module.repository.template,
             module.shareImport('GameObject/definePaintFacility.js'),
             module.shareImport('GameObject/defineInterface.js'),
+            module.shareImport('GameObject/intersect.js'),
         ]),
         Vector2=template.Vector2
     function GameObject(){
@@ -44,5 +46,6 @@
     definePaintFacility(GameObject)
     defineInterface(GameObject.prototype)
     GameObject.Vector2=Vector2
+    GameObject.intersect=intersect
     return GameObject
 })()

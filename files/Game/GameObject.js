@@ -46,6 +46,6 @@
     definePaintFacility(GameObject)
     defineInterface(GameObject.prototype)
     GameObject.Vector2=Vector2
-    GameObject.intersect=intersect
+    Object.assign(GameObject,intersect)
     return GameObject
 })()

@@ -1,11 +1,14 @@
 function intersect(a,ap,b,bp){
-    return rectIntersect(...rect(a,ap),...rect(b,bp))
+    return rectangleIntersect(...rectangle(a,ap),...rectangle(b,bp))
 }
-function rect(o,p){
+function rectangle(o,p){
     let r=o._size.newDivN(2)
     return[p.newSub(r),p.newAdd(r)]
 }
-function rectIntersect(ah,at,bh,bt){
+function rectangleIntersect(ah,at,bh,bt){
     return ah.lt(bt)&&bh.lt(at)
 }
-intersect
+;({
+    intersect,
+    rectangle,
+})

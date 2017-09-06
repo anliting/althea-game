@@ -6,7 +6,6 @@ Object.assign(module.repository,{
 })
 ;(async()=>{
     let[
-        arg,
         dom,
         GameObject,
         applyKeyEventToPressedKeys,
@@ -14,7 +13,6 @@ Object.assign(module.repository,{
         createNode,
         AdvanceEvent,
     ]=await Promise.all([
-        module.repository.althea.arg,
         module.repository.althea.dom,
         module.repository.GameObject,
         module.repository.applyKeyEventToPressedKeys,

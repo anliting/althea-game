@@ -1,14 +1,15 @@
 (async()=>{
     let[
         GameObject,
+        arg,
         dom,
     ]=await Promise.all([
         module.repository.GameObject,
+        module.repository.althea.arg,
         module.repository.althea.dom,
     ])
     return function(){
-        let n=GameObject.prototype.createNode.apply(this,arguments)
-        dom(n,{
+        return dom(GameObject.prototype.createNode.apply(this,arguments),{
             tabIndex:-1,
             oncontextmenu:e=>{
                 if(arg.h)
@@ -26,8 +27,6 @@
                 e.stopPropagation()
                 this._keyup(e)
             }
-        })
-        n.classList.add('game')
-        return n
+        },n=>{n.classList.add('game')})
     }
 })()

@@ -1,5 +1,5 @@
 if(!module.repository.template)
-    module.repository.template=module.importByPath('https://gitcdn.link/cdn/anliting/template/6333a0e1b9546f85be0279dc9a021f51f949c408/src/template.static.js',{mode:1})
+    module.repository.template=module.importByPath('https://gitcdn.link/cdn/anliting/template/5151b86091917a0e550c91875077fa355c0732ee/src/template.static.js',{mode:1})
 Object.assign(module.repository,{
     GameObject:module.shareImport('Game/GameObject.js'),
     applyKeyEventToPressedKeys:module.shareImport('Game/applyKeyEventToPressedKeys.js'),

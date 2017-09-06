@@ -4,14 +4,14 @@
             template,
             definePaintFacility,
             defineInterface,
-            intersect,
+            analyze,
         ]=await Promise.all([
             module.repository.template,
             module.shareImport('GameObject/definePaintFacility.js'),
             module.shareImport('GameObject/defineInterface.js'),
-            module.shareImport('GameObject/intersect.js'),
+            module.shareImport('GameObject/analyze.js'),
         ]),
-        Vector2=template.Vector2
+        {Vector2}=template
     function GameObject(){
         this._size=new Vector2(...arguments)
         this._children=new Set
@@ -46,6 +46,6 @@
     definePaintFacility(GameObject)
     defineInterface(GameObject.prototype)
     GameObject.Vector2=Vector2
-    Object.assign(GameObject,intersect)
+    Object.assign(GameObject,analyze)
     return GameObject
 })()

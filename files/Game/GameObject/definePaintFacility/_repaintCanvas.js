@@ -28,7 +28,7 @@
                 if(canceled)
                     return
                 c.clearRect(0,0,...this._size)
-                a.map(d=>{
+                for(let d of a){
                     if(d.f=='i'||d.f=='bg'){
                         let leftTop=d.printFrom.sub(
                             (new Vector2(d.i.width,d.i.height)).newDivN(2)
@@ -52,7 +52,7 @@
                         c.textBaseline='middle'
                         c.fillText(d.o.text,...leftTop)
                     }
-                })
+                }
                 delete this._painting
             })
         })()

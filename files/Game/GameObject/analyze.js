@@ -29,7 +29,7 @@
                 ).intersect(collisionRange(
                     childRectangle,obstacleRectangle,direction,'y'
                 ),positive)
-            if(range.len)
+            if(+range)
                 rate=Math.min(rate,range.x)
         }
         return rate

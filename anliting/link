@@ -1,1 +1,1 @@
-node $linker files/Game.js files/Game > files/Game.static.js
+#node $linker files/Game.js files/Game > files/Game.static.js

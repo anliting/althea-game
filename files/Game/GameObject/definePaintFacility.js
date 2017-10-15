@@ -1,3 +1,6 @@
+import core from '/lib/core.static.js'
+import _repaintCanvas from './definePaintFacility/_repaintCanvas.js'
+let{dom}=core
 let imageServer={
     _loadedImage:{},
     load(path){
@@ -13,33 +16,23 @@ let imageServer={
         return p
     },
 }
-;(async()=>{
+function _createBackgroundCanvas(img,size){
+    if(
+        img==this._backgroundImageImage&&
+        size.eq(this._size)&&
+        this._backgroundCanvas
+    )
+        return this._backgroundCanvas
     let
-        [
-            dom,
-            _repaintCanvas,
-        ]=await Promise.all([
-            module.repository.althea.dom,
-            module.shareImport('definePaintFacility/_repaintCanvas.js'),
-        ])
-    function _createBackgroundCanvas(img,size){
-        if(
-            img==this._backgroundImageImage&&
-            size.eq(this._size)&&
-            this._backgroundCanvas
-        )
-            return this._backgroundCanvas
-        let
-            c=dom.canvas(),
-            ct=c.getContext('2d')
-        ;[c.width,c.height]=size
-        ct.fillStyle=ct.createPattern(img,'repeat')
-        ct.fillRect(0,0,...size)
-        return this._backgroundCanvas=c
-    }
-    return o=>{
-        o.prototype._repaintCanvas=_repaintCanvas
-        o.prototype._createBackgroundCanvas=_createBackgroundCanvas
-        o.imageServer=imageServer
-    }
-})()
+        c=dom.canvas(),
+        ct=c.getContext('2d')
+    ;[c.width,c.height]=size
+    ct.fillStyle=ct.createPattern(img,'repeat')
+    ct.fillRect(0,0,...size)
+    return this._backgroundCanvas=c
+}
+export default o=>{
+    o.prototype._repaintCanvas=_repaintCanvas
+    o.prototype._createBackgroundCanvas=_createBackgroundCanvas
+    o.imageServer=imageServer
+}

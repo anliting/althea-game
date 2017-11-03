@@ -1,6 +1,5 @@
-import core from '/lib/core.static.js'
+import {dom}from '/lib/core.static.js'
 import addPaintChild from './defineInterface/addPaintChild.js'
-let{dom}=core
 export default o=>{
     o.addPaintChild=addPaintChild
     o.removePaintChild=function(c){

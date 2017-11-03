@@ -1,4 +1,4 @@
-import core from '/lib/core.static.js';
+import { arg, dom } from '/lib/core.static.js';
 import simple from 'https://gitcdn.link/cdn/anliting/simple.js/fc6547da84b3403f8155a7d8a0307d5a55eacecd/src/simple.static.js';
 
 let {DirectedGraph,PriorityQueue}=simple;
@@ -152,7 +152,6 @@ function _repaintCanvas(n){
     }
 }
 
-let {dom: dom$1}=core;
 let imageServer={
     _loadedImage:{},
     load(path){
@@ -176,7 +175,7 @@ function _createBackgroundCanvas(img,size){
     )
         return this._backgroundCanvas
     let
-        c=dom$1.canvas(),
+        c=dom.canvas(),
         ct=c.getContext('2d');[c.width,c.height]=size;
     ct.fillStyle=ct.createPattern(img,'repeat');
     ct.fillRect(0,0,...size);
@@ -212,7 +211,6 @@ function addPaintChild(o,position=new Vector2$2){
     return c
 }
 
-let {dom: dom$2}=core;
 var defineInterface = o=>{
     o.addPaintChild=addPaintChild;
     o.removePaintChild=function(c){
@@ -251,7 +249,7 @@ var defineInterface = o=>{
     };
     o.createNode=function(){
         let doc={
-            node:dom$2.canvas({className:'object'})
+            node:dom.canvas({className:'object'})
         };
         this._updateNodeWidth(doc);
         this._updateNodeHeight(doc);
@@ -359,9 +357,8 @@ div.game.object{
 }
 `;
 
-let {arg,dom: dom$3}=core;
 var createNode = function(){
-    return dom$3(GameObject.prototype.createNode.apply(this,arguments),{
+    return dom(GameObject.prototype.createNode.apply(this,arguments),{
         tabIndex:-1,
         oncontextmenu:e=>{
             if(arg.h)

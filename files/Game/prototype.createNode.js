@@ -1,6 +1,5 @@
 import GameObject from './GameObject.js'
-import core from '/lib/core.static.js'
-let{arg,dom}=core
+import {arg,dom}from '/lib/core.static.js'
 export default function(){
     return dom(GameObject.prototype.createNode.apply(this,arguments),{
         tabIndex:-1,

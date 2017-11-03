@@ -1,10 +1,9 @@
-import core from '/lib/core.static.js'
+import {dom}from '/lib/core.static.js'
 import GameObject from './Game/GameObject.js'
 import applyKeyEventToPressedKeys from './Game/applyKeyEventToPressedKeys.js'
 import style from './Game/style.js'
 import createNode from './Game/prototype.createNode.js'
 import AdvanceEvent from './Game/AdvanceEvent.js'
-let{dom}=core
 function Game(){
     GameObject.apply(this,arguments)
     this._lastAdvancedTime=performance.now()

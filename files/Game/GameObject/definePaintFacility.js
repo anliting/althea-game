@@ -1,6 +1,5 @@
-import core from '/lib/core.static.js'
+import {dom}from '/lib/core.static.js'
 import _repaintCanvas from './definePaintFacility/_repaintCanvas.js'
-let{dom}=core
 let imageServer={
     _loadedImage:{},
     load(path){

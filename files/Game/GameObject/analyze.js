@@ -1,5 +1,4 @@
-import simple from 'https://gitcdn.link/cdn/anliting/simple.js/fc6547da84b3403f8155a7d8a0307d5a55eacecd/src/simple.static.js'
-let{Range}=simple
+import {Range}from 'https://gitcdn.link/cdn/anliting/simple.js/1c1f83d1aa660bd1366b80e8736d7dfefab7e99b/src/simple.static.js'
 function intersect(a,ap,b,bp){
     return rectangleIntersect(...rectangle(a,ap),...rectangle(b,bp))
 }

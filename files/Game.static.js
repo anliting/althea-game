@@ -1,7 +1,6 @@
 import { arg, dom } from '/lib/core.static.js';
-import simple from 'https://gitcdn.link/cdn/anliting/simple.js/fc6547da84b3403f8155a7d8a0307d5a55eacecd/src/simple.static.js';
+import { DirectedGraph, PriorityQueue, Range, Vector2, array } from 'https://gitcdn.link/cdn/anliting/simple.js/1c1f83d1aa660bd1366b80e8736d7dfefab7e99b/src/simple.static.js';
 
-let {DirectedGraph,PriorityQueue}=simple;
 function createContainer(o){
     return{
         in(v){
@@ -61,7 +60,6 @@ function bottom(c){
     return c.v.y-c.o._size.y/2
 }
 
-let {Vector2: Vector2$1}=simple;
 function _repaintCanvas(n){
     if(this._painting)
         this._painting();
@@ -85,7 +83,7 @@ function _repaintCanvas(n){
             for(let d of a){
                 if(d.f=='i'||d.f=='bg'){
                     let leftTop=d.printFrom.sub(
-                        (new Vector2$1(d.i.width,d.i.height)).newDivN(2)
+                        (new Vector2(d.i.width,d.i.height)).newDivN(2)
                     );
                     c.drawImage(d.i,...leftTop);
                     if(d.o.debug){
@@ -138,7 +136,7 @@ function _repaintCanvas(n){
         }).filter(v=>v))
     }
     // depth-first traversal
-    function dft(o,v=new Vector2$1){
+    function dft(o,v=new Vector2){
         let printFrom=v.newMulN(1,-1).add(this._size.newDivN(2));
         if(o._backgroundImage!=undefined)
             a.push({f:'bg',o,v,printFrom});
@@ -187,7 +185,6 @@ var definePaintFacility = o=>{
     o.imageServer=imageServer;
 };
 
-let {Vector2: Vector2$2}=simple;
 function Child(object){
     this.object=object;
 }
@@ -204,7 +201,7 @@ Object.defineProperty(Child.prototype,'p',{set(v){
 },get(){
     return this.position
 }});
-function addPaintChild(o,position=new Vector2$2){
+function addPaintChild(o,position=new Vector2){
     let c=new Child(o);
     c.move(position);
     this._children.add(c);
@@ -258,7 +255,6 @@ var defineInterface = o=>{
     };
 };
 
-let {Range}=simple;
 function intersect(a,ap,b,bp){
     return rectangleIntersect(...rectangle(a,ap),...rectangle(b,bp))
 }
@@ -302,7 +298,6 @@ var analyze = {
     calcLongestMove,
 };
 
-let {Vector2}=simple;
 function GameObject(){
     this._size=new Vector2(...arguments);
     this._children=new Set;
@@ -379,7 +374,6 @@ var createNode = function(){
     },n=>{n.classList.add('game');})
 };
 
-let {array}=simple;
 function AdvanceEvent(time){
     this.time=time;
 }

@@ -1,6 +1,5 @@
-import simple from 'https://gitcdn.link/cdn/anliting/simple.js/fc6547da84b3403f8155a7d8a0307d5a55eacecd/src/simple.static.js'
+import {array}from 'https://gitcdn.link/cdn/anliting/simple.js/1c1f83d1aa660bd1366b80e8736d7dfefab7e99b/src/simple.static.js'
 import applyKeyEventToPressedKeys from './applyKeyEventToPressedKeys.js'
-let{array}=simple
 function AdvanceEvent(time){
     this.time=time
 }

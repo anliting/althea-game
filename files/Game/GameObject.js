@@ -1,8 +1,7 @@
 import definePaintFacility from './GameObject/definePaintFacility.js'
 import defineInterface from './GameObject/defineInterface.js'
 import analyze from './GameObject/analyze.js'
-import simple from 'https://gitcdn.link/cdn/anliting/simple.js/fc6547da84b3403f8155a7d8a0307d5a55eacecd/src/simple.static.js'
-let{Vector2}=simple
+import {Vector2}from 'https://gitcdn.link/cdn/anliting/simple.js/1c1f83d1aa660bd1366b80e8736d7dfefab7e99b/src/simple.static.js'
 function GameObject(){
     this._size=new Vector2(...arguments)
     this._children=new Set

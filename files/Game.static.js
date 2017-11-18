@@ -341,14 +341,13 @@ var applyKeyEventToPressedKeys = (ke,pk)=>{
         delete pk[ke.key];
 };
 
-var style = `.game.object{
+var style = `
+.game.object{
+    width:100%;
+    height:100%;
     outline:none;
     overflow:hidden;
     cursor:default;
-}
-div.game.object{
-    width:100%;
-    height:100%;
 }
 `;
 

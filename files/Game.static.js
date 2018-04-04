@@ -1,5 +1,5 @@
-import { arg, dom } from '/lib/core.static.js';
-import { DirectedGraph, PriorityQueue, Range, Vector2, array } from 'https://gitcdn.link/cdn/anliting/simple.js/1c1f83d1aa660bd1366b80e8736d7dfefab7e99b/src/simple.static.js';
+import { DirectedGraph, PriorityQueue, Vector2, Range, array } from 'https://gitcdn.link/cdn/anliting/simple.js/1c1f83d1aa660bd1366b80e8736d7dfefab7e99b/src/simple.static.js';
+import { dom, arg } from '/lib/core.static.js';
 
 function createContainer(o){
     return{
@@ -174,7 +174,8 @@ function _createBackgroundCanvas(img,size){
         return this._backgroundCanvas
     let
         c=dom.canvas(),
-        ct=c.getContext('2d');[c.width,c.height]=size;
+        ct=c.getContext('2d')
+    ;[c.width,c.height]=size;
     ct.fillStyle=ct.createPattern(img,'repeat');
     ct.fillRect(0,0,...size);
     return this._backgroundCanvas=c
@@ -183,7 +184,7 @@ var definePaintFacility = o=>{
     o.prototype._repaintCanvas=_repaintCanvas;
     o.prototype._createBackgroundCanvas=_createBackgroundCanvas;
     o.imageServer=imageServer;
-};
+}
 
 function Child(object){
     this.object=object;
@@ -253,7 +254,7 @@ var defineInterface = o=>{
         this._nodes.push(doc);
         return doc.node
     };
-};
+}
 
 function intersect(a,ap,b,bp){
     return rectangleIntersect(...rectangle(a,ap),...rectangle(b,bp))
@@ -296,7 +297,7 @@ var analyze = {
     intersect,
     rectangle,
     calcLongestMove,
-};
+}
 
 function GameObject(){
     this._size=new Vector2(...arguments);
@@ -339,7 +340,7 @@ var applyKeyEventToPressedKeys = (ke,pk)=>{
         pk[ke.key]=1;
     else if(ke.type=='keyup'&&ke.key in pk)
         delete pk[ke.key];
-};
+}
 
 var style = `
 .game.object{
@@ -349,9 +350,9 @@ var style = `
     overflow:hidden;
     cursor:default;
 }
-`;
+`
 
-var createNode = function(){
+function createNode(){
     return dom(GameObject.prototype.createNode.apply(this,arguments),{
         tabIndex:-1,
         oncontextmenu:e=>{
@@ -371,7 +372,7 @@ var createNode = function(){
             this._keyup(e);
         }
     },n=>{n.classList.add('game');})
-};
+}
 
 function AdvanceEvent(time){
     this.time=time;

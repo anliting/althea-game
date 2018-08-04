@@ -1,5 +1,5 @@
 import { DirectedGraph, PriorityQueue, Vector2, Range, array } from 'https://gitcdn.link/cdn/anliting/simple.js/1c1f83d1aa660bd1366b80e8736d7dfefab7e99b/src/simple.static.js';
-import { dom, arg } from '/lib/core.static.js';
+import { doe, arg } from '/lib/core.static.js';
 
 function createContainer(o){
     return{
@@ -173,7 +173,7 @@ function _createBackgroundCanvas(img,size){
     )
         return this._backgroundCanvas
     let
-        c=dom.canvas(),
+        c=doe.canvas(),
         ct=c.getContext('2d')
     ;[c.width,c.height]=size;
     ct.fillStyle=ct.createPattern(img,'repeat');
@@ -247,7 +247,7 @@ var defineInterface = o=>{
     };
     o.createNode=function(){
         let doc={
-            node:dom.canvas({className:'object'})
+            node:doe.canvas({className:'object'})
         };
         this._updateNodeWidth(doc);
         this._updateNodeHeight(doc);
@@ -353,7 +353,7 @@ var style = `
 `
 
 function createNode(){
-    return dom(GameObject.prototype.createNode.apply(this,arguments),{
+    return doe(GameObject.prototype.createNode.apply(this,arguments),{
         tabIndex:-1,
         oncontextmenu:e=>{
             if(arg.h)

@@ -1,7 +1,7 @@
 import GameObject from './GameObject.js'
-import {arg,dom}from '/lib/core.static.js'
+import {arg,doe}from '/lib/core.static.js'
 export default function(){
-    return dom(GameObject.prototype.createNode.apply(this,arguments),{
+    return doe(GameObject.prototype.createNode.apply(this,arguments),{
         tabIndex:-1,
         oncontextmenu:e=>{
             if(arg.h)

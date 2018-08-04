@@ -1,4 +1,3 @@
-import {dom}from '/lib/core.static.js'
 import GameObject from './Game/GameObject.js'
 import applyKeyEventToPressedKeys from './Game/applyKeyEventToPressedKeys.js'
 import style from './Game/style.js'

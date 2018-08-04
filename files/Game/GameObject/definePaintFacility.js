@@ -1,4 +1,4 @@
-import {dom}from '/lib/core.static.js'
+import{doe}from '/lib/core.static.js'
 import _repaintCanvas from './definePaintFacility/_repaintCanvas.js'
 let imageServer={
     _loadedImage:{},
@@ -23,7 +23,7 @@ function _createBackgroundCanvas(img,size){
     )
         return this._backgroundCanvas
     let
-        c=dom.canvas(),
+        c=doe.canvas(),
         ct=c.getContext('2d')
     ;[c.width,c.height]=size
     ct.fillStyle=ct.createPattern(img,'repeat')

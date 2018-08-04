@@ -1,4 +1,4 @@
-import {dom}from '/lib/core.static.js'
+import{doe}from'/lib/core.static.js'
 import addPaintChild from './defineInterface/addPaintChild.js'
 export default o=>{
     o.addPaintChild=addPaintChild
@@ -38,7 +38,7 @@ export default o=>{
     }
     o.createNode=function(){
         let doc={
-            node:dom.canvas({className:'object'})
+            node:doe.canvas({className:'object'})
         }
         this._updateNodeWidth(doc)
         this._updateNodeHeight(doc)
